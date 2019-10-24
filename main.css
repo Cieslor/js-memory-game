@@ -1,0 +1,261 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --my-color: #0c1b33;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.alert {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  padding: 25px 40px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+.alert--victory {
+  background: #C81F32;
+  display: block;
+}
+.alert--defeat {
+  background: #404345;
+  display: block;
+}
+.alert--welcome {
+  background: transparent;
+  color: #0c1b33;
+  display: block;
+}
+
+#game-controlls {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #0c1b33;
+}
+#game-controlls .spacing-helper {
+  margin-left: auto;
+}
+#game-controlls label {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+}
+#game-controlls label:nth-of-type(2) {
+  margin-left: 20px;
+}
+#game-controlls .select {
+  font-size: 20px;
+  border-radius: 5px;
+  outline: none;
+  background: #0c1b33;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+#logo {
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+}
+#logo .logo__element {
+  background: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+#logo .logo__element--first {
+  transform: translateY(-50%);
+}
+#logo .logo__element--second {
+  transform: translateY(50%);
+}
+#logo #logo__text {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  margin-left: 15px;
+}
+
+.button {
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.button--start {
+  margin: 0 20px;
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  color: #fff;
+  text-transform: lowercase;
+  transition: color 0.15s ease-in, background-color 0.15s ease-in;
+}
+.button--start:hover {
+  background-color: #fff;
+  color: #0c1b33;
+}
+
+main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 70px;
+  background: #fff;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  list-style: none;
+  font-weight: 700;
+  font-size: 20px;
+  color: #0c1b33;
+}
+.game-info li {
+  padding: 15px;
+}
+.game-info li:last-of-type {
+  font-size: 24px;
+  color: #FDB927;
+}
+
+.grid-board {
+  display: grid;
+  row-gap: 20px;
+  column-gap: 20px;
+  padding: 20px;
+  background: #fff;
+}
+
+.two-columns-board {
+  grid-template-columns: 1fr 1fr;
+}
+
+.four-columns-board {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.five-columns-board {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.six-columns-board {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.scene {
+  perspective: 400px;
+}
+
+.field {
+  height: 130px;
+  width: 130px;
+  position: relative;
+  background: transparent;
+  border-radius: 5px;
+  animation: unFlipField 0.5s forwards linear;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.field__face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+  backface-visibility: hidden;
+}
+.field__face--front {
+  background: #0c1b33;
+}
+.field__face--back {
+  background: #fff;
+  transition: background-color 0.5s ease-in-out;
+  font-size: 3em;
+  border: 2px solid #0c1b33;
+  transform: rotateY(180deg);
+}
+
+.flipped {
+  animation: flipField 0.5s forwards linear;
+}
+
+.guessed {
+  animation: guessed 1s linear forwards;
+  cursor: auto;
+}
+
+.no-animation {
+  animation: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes unFlipField {
+  0% {
+    transform: translateX(0) rotateY(180deg);
+  }
+  50% {
+    transform: translateX(-50%) rotateY(270deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(360deg);
+  }
+}
+@keyframes flipField {
+  0% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateX(-50%) rotateY(90deg);
+  }
+  100% {
+    transform: translateX(0) rotateY(180deg);
+  }
+}
+@keyframes guessed {
+  0% {
+    transform: translateY(0) translateZ(0px) rotateY(180deg);
+  }
+  50% {
+    transform: translateY(-10%) translateZ(10px) rotateY(180deg);
+  }
+  100% {
+    transform: translateY(0) translateZ(0) rotateY(180deg);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
